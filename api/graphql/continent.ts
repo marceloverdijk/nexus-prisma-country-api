@@ -1,5 +1,4 @@
 import { schema } from 'nexus'
-import { createTextChangeRange } from 'typescript'
 
 schema.objectType({
   name: 'Continent',
