@@ -1,8 +1,22 @@
-import { use, log } from 'nexus'
+import { log, settings, use } from 'nexus'
 import { prisma } from 'nexus-plugin-prisma'
 import { PrismaClient } from '@prisma/client'
 
 use(prisma())
+
+settings.change({
+  schema: {
+    connections: {
+      default: {
+        extendConnection: {
+          totalCount: { type: 'Int' },
+        },
+        includeNodesField: true,
+      },
+    },
+    generateGraphQLSDLFile: 'api.graphql',
+  },
+})
 
 const db = new PrismaClient()
 
@@ -29,8 +43,8 @@ async function main() {
       await db.country.create({ data: data })
     }
     log.info('Seeded data successfully')
-    log.info('Continents: ' + await db.continent.count())
-    log.info('Countries: ' + await db.continent.count())
+    log.info('Continents: ' + (await db.continent.count()))
+    log.info('Countries: ' + (await db.continent.count()))
   }
   db.disconnect()
 }

@@ -51,5 +51,14 @@ schema.extendType({
         return ctx.db.country.findMany()
       },
     })
+    t.connection('countryConnection', {
+      type: 'Country',
+      nodes(parent, args, ctx, info) {
+        return ctx.db.country.findMany()
+      },
+      totalCount(parent, args, ctx, info) {
+        return ctx.db.country.count()
+      },
+    })
   },
 })

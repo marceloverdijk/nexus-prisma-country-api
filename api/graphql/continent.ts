@@ -1,4 +1,5 @@
 import { schema } from 'nexus'
+import { createTextChangeRange } from 'typescript'
 
 schema.objectType({
   name: 'Continent',
@@ -42,6 +43,17 @@ schema.extendType({
       nullable: true,
       resolve: (parent, args, ctx) => {
         return ctx.db.continent.findMany()
+      },
+    })
+    t.connection('continentConnection', {
+      type: 'Continent',
+      nodes(parent, args, ctx, info) {
+        ctx.log.info('nodes(..) called!!!!!')
+        return ctx.db.continent.findMany()
+      },
+      totalCount(parent, args, ctx, info) {
+        ctx.log.info('totalCount(..) called!!!!!')
+        return ctx.db.continent.count()
       },
     })
   },
