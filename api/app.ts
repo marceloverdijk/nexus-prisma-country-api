@@ -14,7 +14,6 @@ settings.change({
         includeNodesField: true,
       },
     },
-    generateGraphQLSDLFile: 'api.graphql',
   },
 })
 
