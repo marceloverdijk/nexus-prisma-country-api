@@ -7,13 +7,19 @@
     ],
     "strict": true,
     "rootDir": "api",
+    "noEmit": true,
     "plugins": [
       {
         "name": "nexus/typescript-language-service"
       }
+    ],
+    "typeRoots": [
+      "node_modules/@types",
+      "types"
     ]
   },
   "include": [
+    "types.d.ts",
     "api"
   ]
 }
